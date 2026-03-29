@@ -1,4 +1,4 @@
-FROM openjdk:8-jdk-alpine3.18 as builder
+FROM openjdk:17-alpine as builder
 RUN mkdir -p /app/source
 COPY . /app/source
 WORKDIR /app/source
