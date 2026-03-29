@@ -1,11 +1,11 @@
-FROM openjdk:17.0.18-jdk-slim AS builder
+FROM openjdk:17-jdk AS builder
 RUN mkdir -p /app/source
 COPY . /app/source
 WORKDIR /app/source
 RUN ./mvnw clean package
 
 
-FROM openjdk:17.0.18-jdk-slim
+FROM openjdk:17-jdk
 WORKDIR /app
 COPY --from=builder /app/source/target/*.jar /app/app.jar
 EXPOSE 8080
