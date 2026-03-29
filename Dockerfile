@@ -1,11 +1,11 @@
-FROM openjdk:17-alpine as builder
+FROM openjdk:17-slim AS builder
 RUN mkdir -p /app/source
 COPY . /app/source
 WORKDIR /app/source
 RUN ./mvnw clean package
 
 
-FROM builder
+FROM openjdk:17-slim
 COPY --from=builder /app/source/target/*.jar /app/app.jar
 EXPOSE 8080
 ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom", "-jar", "/app/app.jar"]
